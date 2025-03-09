@@ -31,6 +31,9 @@ jobs:
     - name: Verify AWS Identity
       run: aws sts get-caller-identity
 
+    - name: Copy the private ssh key to connect to the EC2 instance
+      run: aws s3 cp s3://clo835-assignment2-dev-s3-bucket/keys/assignment2-dev ~/.ssh/assignment2-dev
+    
     - name: Install dependencies
       working-directory: EC2/installation
       run: ansible-playbook -i aws_ec2.yaml playbook.yaml --private-key ~/.ssh/assignment2-dev
