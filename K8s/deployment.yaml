@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-web-deployment
+  namespace: clo835-assignment2-app
+  labels:
+    app: frontend
+spec:
+  replicas: 3  # Three replicas for the web app
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend-container
+          image: 103848042406.dkr.ecr.us-east-1.amazonaws.com/clo835-assignment2-app:v0.1
+          ports:
+            - containerPort: 8080
+            - containerPort: 8081
+            - containerPort: 8082
+          env:
+            - name: APP_COLOR
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['app-color']
+            - name: DBHOST
+              value: "mysql-db-service"  # Refers to the stable DB service
+            - name: DBPORT
+              value: "3306"
+            - name: DBUSER
+              value: "root"
+            - name: DBPWD
+              value: "pw"
+      imagePullSecrets:
+        - name: ecr-secret
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-db-deployment
+  namespace: clo835-assignment2-app
+  labels:
+    app: mysql-db
+spec:
+  replicas: 1  # One replica for the database
+  selector:
+    matchLabels:
+      app: mysql-db
+  template:
+    metadata:
+      labels:
+        app: mysql-db
+    spec:
+      containers:
+        - name: mysql-container
+          image: 103848042406.dkr.ecr.us-east-1.amazonaws.com/clo835-assignment2-db:v0.1
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "pw"
+            - name: MYSQL_DATABASE
+              value: "employees"
+            - name: MYSQL_USER
+              value: "root"
+            - name: MYSQL_PASSWORD
+              value: "pw"
+      imagePullSecrets:
+        - name: ecr-secret
