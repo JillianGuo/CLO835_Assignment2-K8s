@@ -31,7 +31,7 @@ jobs:
     - name: Verify AWS Identity
       run: aws sts get-caller-identity
 
-    - name: Copy the private ssh key to connect to the EC2 instance
+    - name: Download the private ssh key to connect to the EC2 instance
       run: aws s3 cp s3://clo835-assignment2-dev-s3-bucket/keys/assignment2-dev assignment2-dev
 
     - name: chmod 400 on the SSH key
