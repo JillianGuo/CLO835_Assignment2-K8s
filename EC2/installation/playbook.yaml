@@ -1,0 +1,36 @@
+---
+- name: Install Docker, kubectl, and kind
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: Install required dependencies for Docker and kind
+      yum:
+        name:
+          - yum-utils
+          - curl
+          - git
+        state: present
+
+    - name: Install Docker (yum install)
+      yum:
+        name: docker
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Install Kind binary
+      get_url:
+        url: https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64
+        dest: /usr/local/bin/kind
+        mode: '0755'
+
+    - name: Install kubectl
+      get_url:
+        url: https://storage.googleapis.com/kubernetes-release/release/v1.24.0/bin/linux/amd64/kubectl
+        dest: /usr/local/bin/kubectl
+        mode: '0755'
