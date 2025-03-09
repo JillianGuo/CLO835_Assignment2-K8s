@@ -18,14 +18,6 @@ jobs:
       with:
         terraform_version: 1.11.1
         
-    - name: "Install Ansible"
-      uses: alex-oleshkevich/setup-ansible@v1.0.1
-      with:
-          version: "9.3.0"
-
-    - name: Installing aws Boto3
-      run: pip install boto3
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
@@ -65,11 +57,4 @@ jobs:
     - name: Apply Terraform
       working-directory: EC2/deployment
       run: terraform apply -auto-approve
-
-    - name: Wait for 3 minutes for creating the EC2 instance
-      run: sleep 180
-
-    - name: Install dependencies
-      working-directory: EC2/installation
-      run: ansible-playbook -i aws_ec2.yaml playbook.yaml --private-key ~/.ssh/assignment2-dev
 
