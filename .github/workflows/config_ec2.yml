@@ -37,3 +37,7 @@ jobs:
     - name: Install dependencies
       working-directory: EC2/installation
       run: ansible-playbook -i aws_ec2.yaml playbook.yaml --private-key ~/.ssh/assignment2-dev
+
+    - name: Clean up SSH keys
+      run: |
+        rm -f ~/.ssh/assignment2-dev
