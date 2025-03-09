@@ -41,17 +41,8 @@ jobs:
       run: aws sts get-caller-identity
 
     - name: Download the public ssh key for creating EC2 instance
-      run: aws s3 cp s3://clo835-assignment2-dev-s3-bucket/keys/assignment2-dev assignment2-dev.pub
+      run: aws s3 cp s3://clo835-assignment2-dev-s3-bucket/keys/assignment2-dev ~/.ssh/assignment2-dev.pub
 
-
-    # - name: Store private key
-    #   run: aws s3 cp ~/.ssh/assignment2-dev s3://clo835-assignment2-dev-s3-bucket/keys/assignment2-dev
-
-    # - name: Store public key
-    #   run: aws s3 cp ~/.ssh/assignment2-dev.pub s3://clo835-assignment2-dev-s3-bucket/keys/assignment2-dev.pub
-      
-    # - name: chmod 400 on the SSH key
-    #   run: chmod 400 ~/.ssh/assignment2-dev
       
     - name: Initialize Terraform
       working-directory: EC2/deployment
@@ -67,4 +58,4 @@ jobs:
 
     - name: Clean up SSH keys
       run: |
-        rm -f assignment2-dev.pub
+        rm -f ~/.ssh/assignment2-dev.pub
