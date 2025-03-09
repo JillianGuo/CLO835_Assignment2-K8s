@@ -66,8 +66,8 @@ jobs:
       working-directory: EC2/deployment
       run: terraform apply -auto-approve
 
-    - name: Wait for 60 seconds for creating the EC2 instance
-      run: sleep 60
+    - name: Wait for 3 minutes for creating the EC2 instance
+      run: sleep 180
 
     - name: Install dependencies
       working-directory: EC2/installation
