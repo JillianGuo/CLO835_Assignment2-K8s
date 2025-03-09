@@ -1,4 +1,4 @@
-name: Deploy EC2 instance
+name: Configure EC2 instance
 
 on: workflow_dispatch
 
