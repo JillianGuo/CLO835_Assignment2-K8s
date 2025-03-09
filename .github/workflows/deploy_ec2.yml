@@ -41,8 +41,7 @@ jobs:
       run: aws sts get-caller-identity
 
     - name: Download the public ssh key for creating EC2 instance
-      run: aws s3 cp s3://clo835-assignment2-dev-s3-bucket/keys/assignment2-dev ~/.ssh/assignment2-dev.pub
-
+      run: aws s3 cp s3://clo835-assignment2-dev-s3-bucket/keys/assignment2-dev.pub ~/.ssh/assignment2-dev.pub
       
     - name: Initialize Terraform
       working-directory: EC2/deployment
