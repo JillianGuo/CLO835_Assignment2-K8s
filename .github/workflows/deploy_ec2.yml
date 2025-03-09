@@ -42,6 +42,12 @@ jobs:
 
     - name: SSH Key Creation
       run: ssh-keygen -t rsa -f ~/.ssh/assignment2-dev -N "" 
+
+    - name: Store private key
+      run: aws s3 cp ~/.ssh/assignment2-dev s3://clo835-assignment2-dev-s3-bucket/keys/assignment2-dev
+
+    - name: Store public key
+      run: aws s3 cp ~/.ssh/assignment2-dev.pub s3://clo835-assignment2-dev-s3-bucket/keys/assignment2-dev.pub
       
     - name: chmod 400 on the SSH key
       run: chmod 400 ~/.ssh/assignment2-dev
@@ -58,3 +64,6 @@ jobs:
       working-directory: EC2/deployment
       run: terraform apply -auto-approve
 
+    - name: Clean up SSH keys
+      run: |
+        rm -f ~/.ssh/assignment2-dev ~/.ssh/assignment2-dev.pub
