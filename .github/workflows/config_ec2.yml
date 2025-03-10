@@ -39,7 +39,7 @@ jobs:
     
     - name: Install dependencies
       working-directory: EC2/installation
-      run: ansible-playbook -i aws_ec2.yaml playbook.yaml --private-key assignment2-dev
+      run: ansible-playbook -i aws_ec2.yaml playbook.yaml --private-key assignment2-dev --ssh-extra-args='-o StrictHostKeyChecking=no'
 
     - name: Clean up SSH keys
       run: |
