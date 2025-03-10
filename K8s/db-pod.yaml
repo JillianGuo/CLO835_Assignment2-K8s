@@ -14,11 +14,11 @@ spec:
         - containerPort: 3306
       env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "pw"
+          value: "passw.rd"
         - name: MYSQL_DATABASE
           value: "employees"
         - name: MYSQL_USER
-          value: "root"
+          value: "admin"
         - name: MYSQL_PASSWORD
           value: "pw"
   imagePullSecrets:

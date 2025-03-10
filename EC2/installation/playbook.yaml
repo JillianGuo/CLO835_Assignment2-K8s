@@ -23,6 +23,12 @@
         state: started
         enabled: yes
 
+    - name: Add ec2-user to the docker group
+      user:
+        name: ec2-user
+        groups: docker
+        append: yes
+
     - name: Install Kind binary
       get_url:
         url: https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64

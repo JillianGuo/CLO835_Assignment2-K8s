@@ -22,7 +22,7 @@ variable "instance_type" {
   default = {
     "prod"    = "t3.medium"
     "staging" = "t3.micro"
-    "dev"     = "t3.micro"
+    "dev"     = "t3.medium"
   }
   description = "Type of the instance"
   type        = map(string)

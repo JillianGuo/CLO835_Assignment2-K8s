@@ -25,9 +25,8 @@ Create docker images for application and (MySQL) database and publish the images
 
   `ansible-playbook -i aws_ec2.yaml playbook.yaml --private-key /path/to/private_key`
   
-- Add ec2-user into Docker group, grant this user permissions to docker
-  `sudo usermod -aG docker ec2-user`
-
+  > **_NOTE:_**  Same files and method works on Cloud9, but not on GitHub Actions so far.
+  
 - (Optional) Start and enable docker if not yet
   ```
   sudo systemctl start docker

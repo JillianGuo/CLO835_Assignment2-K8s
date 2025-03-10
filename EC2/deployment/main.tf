@@ -56,6 +56,10 @@ resource "aws_instance" "my_amazon" {
       "Name" = "${local.name_prefix}-Amazon-Linux"
     }
   )
+  
+  root_block_device {
+    volume_size = 20  # Set the desired volume size in GB
+  }
 }
 
 

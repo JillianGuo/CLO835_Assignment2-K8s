@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: frontend-web-deployment
+  namespace: clo835-assignment2-app
+  labels:
+    app: frontend
+spec:
+  replicas: 3  # Three replicas for the web app
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec: 
+      containers:
+        - name: frontend-container
+          image: 103848042406.dkr.ecr.us-east-1.amazonaws.com/clo835-assignment2-app:v0.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APP_COLOR
+              value: "blue"
+            - name: DBHOST
+              value: "mysql-db-service"  # Refers to the stable DB service
+            - name: DBPORT
+              value: "3306" 
+            - name: DBUSER
+              value: "admin"
+            - name: DBPWD
+              value: "pw"
+              
+      imagePullSecrets:
+        - name: ecr-secret

@@ -20,7 +20,7 @@ spec:
         - name: DBPORT
           value: "3306" 
         - name: DBUSER
-          value: "root"
+          value: "admin"
         - name: DBPWD
           value: "pw"
           
