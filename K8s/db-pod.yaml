@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: mysql-db-pod
-  namespace: clo835-assignment2-app
+  name: db-pod
+  namespace: clo835-db
   labels:
     app: mysql-db
     tier: backend
@@ -14,12 +14,6 @@ spec:
         - containerPort: 3306
       env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "passw.rd"
-        - name: MYSQL_DATABASE
-          value: "employees"
-        - name: MYSQL_USER
-          value: "admin"
-        - name: MYSQL_PASSWORD
           value: "pw"
   imagePullSecrets:
     - name: ecr-secret

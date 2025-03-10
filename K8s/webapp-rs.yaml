@@ -1,22 +1,21 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: frontend-web-rs
-  namespace: clo835-assignment2-app
+  name: employees-replicaset
   labels:
-    app: frontend
+    app: employees
 spec:
-  replicas: 3  # Ensures 3 running replicas
+  replicas: 3  
   selector:
     matchLabels:
-      app: frontend
+      app: employees
   template:
     metadata:
       labels:
-        app: frontend
+        app: employees
     spec:
       containers:
-        - name: frontend-container
+        - name: employees-web-app
           image: 103848042406.dkr.ecr.us-east-1.amazonaws.com/clo835-assignment2-app:v0.1
           ports:
             - containerPort: 8080
@@ -24,12 +23,13 @@ spec:
             - name: APP_COLOR
               value: "blue"
             - name: DBHOST
-              value: "mysql-db-service"  # Use the stable DB service
+              value: "10.244.0.6"  # Use the stable DB service
             - name: DBPORT
               value: "3306"
             - name: DBUSER
               value: "root"
             - name: DBPWD
               value: "pw"
+              
       imagePullSecrets:
         - name: ecr-secret

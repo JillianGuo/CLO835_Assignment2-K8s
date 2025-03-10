@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
   name: mysql-replicaset
   labels:
     app: mysql
-
 spec:
-  replicas: 1
+  replicas: 1  
   selector:
     matchLabels:
       app: mysql
@@ -25,18 +24,3 @@ spec:
               value: "pw"
       imagePullSecrets:
         - name: ecr-secret
-
-
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql-service
-spec:
-  selector:
-    app: mysql
-  ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306

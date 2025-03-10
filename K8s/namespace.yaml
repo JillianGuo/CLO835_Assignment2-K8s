@@ -1,5 +1,12 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: clo835-assignment2-app
+  name: clo835-db
+  
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: clo835-app
 
