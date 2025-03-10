@@ -204,7 +204,7 @@ Create docker images for application and (MySQL) database and publish the images
 
 - Demonstrate accessing the application from EC2 instance using `curl`.
   ```
-  curl http://<cluster-ip>:8080
+  curl http://localhost:30000
   ```
 
 - Demonstrate accessing the application from the browser.
@@ -215,6 +215,19 @@ Create docker images for application and (MySQL) database and publish the images
     ```
 
  > **_NOTE:_**  Expose the NodePort to Your EC2 Host (Update kind.yaml with NodePort mapping)
+
+
+### Update the image version 
+
+- Update image version in `db-deployment.yaml` and `webapp-deployment.yam`
+
+- Verify new version
+  ```
+  kubectl apply -f db-deployment.yaml
+  kubectl apply -f webapp-deployment.yaml
+  kubectl apply -f webapp-service.yaml
+  kubectl get pods -A -o jsonpath="{.items[*].spec.containers[*].image}"
+  ```
 
 
 ## Cleanup
